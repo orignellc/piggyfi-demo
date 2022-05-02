@@ -2,15 +2,15 @@ import money from "~/helpers/money";
 
 export default class Transaction {
   static newOrder(input) {
-    return transform();
+    return new Promise(() => transform());
   }
 
   static getById(id) {
-    return transform();
+    return new Promise(() => transform());
   }
 
   fundSent(transactionId) {
-    return transform();
+    return new Promise(() => transform());
   }
 }
 

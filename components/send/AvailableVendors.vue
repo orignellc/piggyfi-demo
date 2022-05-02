@@ -12,6 +12,7 @@
             vendor.completedTrades
           }}</span>
           |
+          <Icons icon="heart" pack="iconsax-linear" />
           <span class="font-medium text-black">{{ vendor.rating }}</span>
         </div>
       </div>
@@ -28,7 +29,7 @@
             @click="$emit('input', vendor)"
             class="block rounded-md bg-primary-500 py-1 px-3 font-medium text-white text-sm"
           >
-            Convert
+            Select vendor
           </button>
         </div>
       </div>
@@ -38,6 +39,11 @@
 
 <script setup>
 import Vendor from "../../daos/vendor";
+import Icons from "../ui/Icons";
 
-const vendors = await Vendor.all();
+const filter = defineProps({
+  amount: Number,
+  country: String,
+});
+const vendors = await Vendor.all(filter);
 </script>

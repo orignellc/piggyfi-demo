@@ -37,7 +37,7 @@
             </NuxtLink>
 
             <NuxtLink
-              to="/demo/wallet/withdraw"
+              :to="routes.wallet.withdraw"
               class="inline-flex items-center"
             >
               <span
@@ -55,14 +55,20 @@
 </template>
 
 <script setup>
+import routes from "../../helpers/routes";
 import Icons from "../../components/ui/Icons";
 import User from "../../daos/user";
 import { useRoute } from "nuxt/app";
-import { onMounted, ref } from "#imports";
+import { onMounted, ref, computed } from "#imports";
+import authentication from "../../store/authentication";
 
 const route = useRoute();
-const user = ref({});
-onMounted(async () => (user.value = await User.getByID(route.params.id)));
+const user = computed(() => authentication.authUser);
+
+onMounted(async () => {
+  const user = await User.getByID(route.params.id);
+  authentication.setAuthUser(user);
+});
 </script>
 
 <style>

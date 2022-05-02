@@ -11,7 +11,7 @@
       <div class="">
         <button
           class="mb-8 p-3 pl-0"
-          v-if="hideBackButton === false"
+          v-if="!hideBackButton"
           @click="router.go(-1)"
         >
           <Icons icon="arrow-left" pack="iconsax-linear" />
@@ -26,7 +26,7 @@ import Icons from "../components/ui/Icons";
 import { useRouter } from "nuxt/app";
 
 const { hideBackButton } = defineProps({
-  hideBackButton: { default: true, type: Boolean },
+  hideBackButton: { type: Boolean },
 });
 
 const router = useRouter();

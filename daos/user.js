@@ -26,10 +26,12 @@ async function getByIDorEmail(value) {
 
   return transform(data.data);
 }
+
 function transform(user) {
   return {
     _id: user._id,
     name: user.name,
+    countryCode: user.countryCode,
     balance: money.format(0),
   };
 }

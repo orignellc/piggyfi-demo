@@ -1,15 +1,20 @@
+import axios from "axios";
+
 export default class Vendor {
-  static all() {
-    return new Promise((resolve) => {
-      resolve([
-        {
-          _id: 2314234,
-          name: "Emmanuel",
-          completedTrades: 100,
-          rating: "4/20",
-          rate: 590,
-        },
-      ]);
-    });
+  static async all(params) {
+    const { data } = await axios.get(
+      "https://celo-demo.herokuapp.com/api/vendors/available",
+      { params }
+    );
+
+    return transform(data);
   }
+}
+
+function transform(vendor) {
+  return {
+    _id: vendor.id,
+    name: vendor.amount,
+    rates: vendor.rates,
+  };
 }
