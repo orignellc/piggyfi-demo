@@ -1,28 +1,44 @@
-import axios from "axios";
 import money from "~/helpers/money";
+import Dao from "~/daos/dao";
 
-export default class User {
-  static async all() {
-    const { data } = await axios.get(
-      "https://celo-demo.herokuapp.com/api/users"
-    );
+export default class User extends Dao {
+  getTestCustomers() {
+    return [
+      {
+        name: "John Doe",
+        password: "Password",
+        email: "john@mailinator.com",
+        countryCode: "NG",
+      },
+      {
+        name: "Jane Doe",
+        password: "Password",
+        email: "jane@mailinator.com",
+        countryCode: "KE",
+      },
+    ];
+  }
+
+  async login({ identifier, password }) {
+    const { data } = await this.post("users/login", {
+      identifier,
+      password,
+    });
 
     return data.data;
   }
 
-  static async getByID(id) {
+  async getByID(id) {
     return getByIDorEmail(id);
   }
 
-  static async getByEmail(email) {
+  async getByEmail(email) {
     return getByIDorEmail(email);
   }
 }
 
 async function getByIDorEmail(value) {
-  const { data } = await axios.get(
-    `https://celo-demo.herokuapp.com/api/users/${value}`
-  );
+  const { data } = await this.get(`users/${value}`);
 
   return transform(data.data);
 }

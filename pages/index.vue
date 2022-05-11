@@ -4,20 +4,20 @@
       <div class="text-lg font-medium mb-3">Login as Customers</div>
 
       <div class="app-list bg-white rounded-md shadow-card px-3 py-2">
-        <a
-          :href="`/demo/${user._id}`"
-          class="cursor-pointer p-3 py-4 hover:bg-gray-50 block"
+        <button
+          @click="login(user.email, user.password)"
+          class="cursor-pointer p-3 py-4 hover:bg-gray-50 block w-full"
           v-for="user in users"
         >
-          <div class="flex justify-between">
+          <span class="flex justify-between">
             <span class="">{{ user.name }}</span>
             <span
+              v-if="user.countryCode"
               class="h-6 w-6 bg-contain bg-no-repeat bg-center"
               :style="`background-image: url(https://flagcdn.com/${user.countryCode.toLowerCase()}.svg)`"
             ></span>
-          </div>
-          <div class="text-sm text-gray-700">{{ user.email }}</div>
-        </a>
+          </span>
+        </button>
       </div>
     </div>
 
@@ -44,7 +44,11 @@
 <script setup>
 import User from "../daos/user";
 
-const users = await User.all();
+const customers = async function login(email, password) {
+  const userDao = new User();
+  const user = await userDao.login({ identifier: email, password });
+  console.log(user);
+};
 </script>
 
 <style>

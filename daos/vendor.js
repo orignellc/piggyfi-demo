@@ -1,11 +1,8 @@
-import axios from "axios";
+import Dao from "~/daos/dao";
 
-export default class Vendor {
+export default class Vendor extends Dao {
   static async all(params) {
-    const { data } = await axios.get(
-      "https://celo-demo.herokuapp.com/api/vendors/available",
-      { params }
-    );
+    const { data } = await this.get("vendors/available", { params });
 
     return transform(data);
   }

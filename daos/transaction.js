@@ -1,6 +1,7 @@
 import money from "~/helpers/money";
+import Dao from "~/daos/dao";
 
-export default class Transaction {
+export default class Transaction extends Dao {
   static newOrder(input) {
     return new Promise(() => transform());
   }

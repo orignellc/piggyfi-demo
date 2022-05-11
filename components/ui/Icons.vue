@@ -1,10 +1,10 @@
 <template>
   <svg
     class="iconsax-linear"
-    v-html="icons[icon]"
+    v-html="linearIcons[icon]"
     v-if="pack === 'iconsax-linear'"
   />
-  <svg class="iconsax" v-html="linearIcons[icon]" v-else />
+  <svg class="iconsax" v-html="icons[icon]" v-else />
 </template>
 
 <script setup>
